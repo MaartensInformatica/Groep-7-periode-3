@@ -14,7 +14,7 @@ code = {'ttt': 'F', 'tct': 'S', 'tat': 'Y', 'tgt': 'C',
         'gtc': 'V', 'gcc': 'A', 'gac': 'D', 'ggc': 'G',
         'gta': 'V', 'gca': 'A', 'gaa': 'E', 'gga': 'G',
         'gtg': 'V', 'gcg': 'A', 'gag': 'E', 'ggg': 'G'
-       }
+        }
 
 aa3 = {"Ala": ["GCU", "GCC", "GCA", "GCG"],
        "Arg": ["CGU", "CGC", "CGA", "CGG", "AGA", "AGG"],
@@ -31,11 +31,11 @@ aa3 = {"Ala": ["GCU", "GCC", "GCA", "GCG"],
        "Met": ["AUG"],
        "Phe": ["UUU", "UUC"],
        "Pro": ["CCU", "CCC", "CCA", "CCG"],
-       "Ser": ["UCU", "UCC", "UCA", "UCG", "AGU","AGC"],
+       "Ser": ["UCU", "UCC", "UCA", "UCG", "AGU", "AGC"],
        "Thr": ["ACU", "ACC", "ACA", "ACG"],
        "Trp": ["UGG"],
        "Tyr": ["UAU", "UAC"],
        "Val": ["GUU", "GUC", "GUA", "GUG"],
        "Start": ["AUG", "CUG", "UUG", "GUG", "AUU"],
-       "Stop" : ["UAG", "UGA", "UAA"]
-      }
+       "Stop": ["UAG", "UGA", "UAA"]
+       }
