@@ -68,7 +68,7 @@ def read_file(file):
 
         # Add line to sequence
         else:
-            seq += line.strip()
+            seq += line.strip().lower()
 
     # No new header can be found at end of file
     # Add last header and seq to dict
@@ -207,7 +207,7 @@ def fill_amino_acids(dict_freq_aa, codon_freq_dict):
         for codon in codon_freq_dict.keys():
             if code[codon.lower()] == aa:
                 codons.append(codon)
-                frequencies.append(codon_freq_dict[codon])
+                frequencies.append(codon_freq_dict[codon]/aa_freq)
 
         obj = Amino_acid(aa, codons, frequencies)
         amino_acids.append(obj)
@@ -219,7 +219,7 @@ def amino_graph(aa_codon_frequencies, title):
     """"
 
     """
-
+    fig, ax = plt.subplots(1, figsize=(12, 10))
     # Plot stacked bar
     left = len(aa_codon_frequencies)
 
@@ -233,10 +233,11 @@ def amino_graph(aa_codon_frequencies, title):
     for codon in all_codons:
 
         freqs = []
-        for aa in aa_codon_frequencies:
-
+        for i in range(len(aa_codon_frequencies)):
             try:
-                freqs.append(aa.get_codon_frequencies()[codon.upper()])
+                freq = aa_codon_frequencies[i].get_codon_frequencies()[codon]
+                freqs.append(freq)
+                plt.text(left[i] + freq * 0.5, i, round(freq, 2))
             except KeyError:
                 freqs.append(0)
 
@@ -245,7 +246,20 @@ def amino_graph(aa_codon_frequencies, title):
         for i in range(len(left)):
             left[i] += freqs[i]
 
-    plt.title(title)
+
+    plt.suptitle(title)
+    plt.xlabel("Codonfrequentie")
+    plt.ylabel("Aminozuren")
+    ax.spines['right'].set_visible(False)
+    ax.spines['left'].set_visible(False)
+    ax.spines['top'].set_visible(False)
+    ax.spines['bottom'].set_visible(False)
+    # adjust limits and draw grid lines
+    plt.ylim(-0.5, ax.get_yticks()[-1] + 0.5)
+    ax.set_axisbelow(True)
+    ax.xaxis.grid(color='gray', linestyle='dashed')
+    # plt.legend(all_codons, bbox_to_anchor=(1.04, 0.5), ncol=4, frameon=False)
+    plt.tight_layout()
     plt.show()
 
 
@@ -279,6 +293,7 @@ def main():
         freq_codon = freq_codons_organism(dict_prot)
         dict_freq_aa = freq_amino_acid(freq_codon)
         aa_codon_frequencies = fill_amino_acids(dict_freq_aa, freq_codon)
+
         title = file_name.replace(".fasta", "")
         amino_graph(aa_codon_frequencies, title)
 
