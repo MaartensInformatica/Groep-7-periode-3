@@ -3,6 +3,7 @@
 
 from translation import code
 import matplotlib.pyplot as plt
+from colour import Color
 
 
 class Amino_acid:
@@ -221,7 +222,19 @@ def amino_graph(aa_codon_frequencies, title):
     """
     fig, ax = plt.subplots(1, figsize=(12, 10))
     # Plot stacked bar
-    left = len(aa_codon_frequencies)
+
+    red = Color("red")
+    colors = list(red.range_to(Color("yellow"), 16))
+    yellow = Color("yellow")
+    colors += list(yellow.range_to(Color("green"), 16))
+    green = Color("green")
+    colors += list(green.range_to(Color("blue"), 16))
+    blue = Color("blue")
+    colors += list(blue.range_to(Color("purple"), 16))
+
+    bar_colors = []
+    for color in colors:
+        bar_colors.append(color.rgb)
 
     aa_names = []
     for aa in aa_codon_frequencies:
@@ -230,22 +243,21 @@ def amino_graph(aa_codon_frequencies, title):
     all_codons = code.keys()
 
     left = len(aa_names) * [0]
-    for codon in all_codons:
-
+    for c in range(len(all_codons)):
         freqs = []
         for i in range(len(aa_codon_frequencies)):
             try:
-                freq = aa_codon_frequencies[i].get_codon_frequencies()[codon]
+                freq = aa_codon_frequencies[i].get_codon_frequencies()[
+                    list(all_codons)[c]]
                 freqs.append(freq)
                 plt.text(left[i] + freq * 0.5, i, round(freq, 2))
             except KeyError:
                 freqs.append(0)
 
-        plt.barh(aa_names, freqs, left=left)
+        plt.barh(aa_names, freqs, left=left, color=bar_colors[c])
 
         for i in range(len(left)):
             left[i] += freqs[i]
-
 
     plt.suptitle(title)
     plt.xlabel("Codonfrequentie")
@@ -258,7 +270,7 @@ def amino_graph(aa_codon_frequencies, title):
     plt.ylim(-0.5, ax.get_yticks()[-1] + 0.5)
     ax.set_axisbelow(True)
     ax.xaxis.grid(color='gray', linestyle='dashed')
-    # plt.legend(all_codons, bbox_to_anchor=(1.04, 0.5), ncol=4, frameon=False)
+    plt.legend(all_codons, bbox_to_anchor=(1.04, 0.5), ncol=4, frameon=False)
     plt.tight_layout()
     plt.show()
 
