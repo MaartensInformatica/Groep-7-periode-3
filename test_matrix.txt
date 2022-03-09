@@ -1,0 +1,9 @@
+#
+#
+#  Percent Identity  Matrix - created by Clustal2.1 
+#
+#
+
+     1: sp|P69905|HBA_HUMAN   100.00   85.92   56.34
+     2: sp|P01942|HBA_MOUSE    85.92  100.00   56.34
+     3: sp|P13786|HBAZ_CAPHI   56.34   56.34  100.00
