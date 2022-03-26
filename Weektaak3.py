@@ -2,8 +2,17 @@
 # Groep 7
 
 from translation import code
+from translation import aa3
 import matplotlib.pyplot as plt
 import numpy as np
+
+class amino_acid:
+
+    def __init__(self, amino_acid, codons):
+        self.__amino_acid = amino_acid
+        self.__codons = codons
+
+
 
 
 def read_file(file):
@@ -198,6 +207,29 @@ def fraction_count_codon(freq_codon, dict_freq_aa):
         dict_fraction_codon[codon] = fraction
 
     return dict_fraction_codon
+
+def list_of_all_data(dict_fraction_codon):
+    amino_codon_freqs = []
+
+    for amino_acids, codons in dict_fraction_codon.items():
+        if dict_fraction_codon[amino_acids] in aa3
+
+
+def amino_graph(dict_fraction_codon, dict_freq_aa):
+    amino_labels = []
+    codon_labels = []
+    codon_frequence = []
+
+    for amino_acids, codons in aa3.items():
+        amino_labels.append(amino_acids)
+        codon_labels.append(codons)
+
+    for codons, fractions in dict_fraction_codon.items():
+        codon_frequence.append(fractions)
+
+
+
+
 
 
 def main():
